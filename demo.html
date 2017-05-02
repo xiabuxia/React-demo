@@ -15,10 +15,13 @@
 
 
 var data = 123;
+
 /*组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求，下面表示组件的title属性是必须的，并且要是数字类型*/
+/*getDefaultProps方法可以用来设置组件属性的默认值。*/
+
 var MyTitle  = React.createClass({
-    propTypes: {
-        title: React.PropTypes.number.isRequired,
+    getDefaultProps: function(){
+        return {title: 'hello world'}
     },
     render: function(){
         return <h1>{this.props.title}</h1>
