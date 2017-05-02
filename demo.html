@@ -12,26 +12,22 @@
 <body>
     <div id="example"></div>
     <script type="text/babel">
-var NotesList  = React.createClass({
+
+
+var data = 123;
+/*组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求，下面表示组件的title属性是必须的，并且要是数字类型*/
+var MyTitle  = React.createClass({
+    propTypes: {
+        title: React.PropTypes.number.isRequired,
+    },
     render: function(){
-        return (
-            <ol>
-            {
-                React.Children.map(this.props.children,function(child){
-                    return <li>{child}</li>
-                })
-            }
-            </ol>
-        )
+        return <h1>{this.props.title}</h1>
     }
 })
 
-/*this.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点*/
+
 ReactDOM.render(
-    <NotesList>
-        <span>hello</span>
-        <span>world</span>
-    </NotesList>,
+    <MyTitle title={data}/>,
     document.querySelector('#example')
 )
 
