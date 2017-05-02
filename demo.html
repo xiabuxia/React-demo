@@ -17,7 +17,9 @@
         ReactDOM.render(
             <div>
                 {
-                    <div>这样也可以</div>
+                    name.map(function(name){
+                        return <div>hello,{name}!</div>
+                    })
                 }
             </div>,
             document.querySelector('#example')
