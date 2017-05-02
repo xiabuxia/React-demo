@@ -12,18 +12,15 @@
 <body>
     <div id="example"></div>
     <script type="text/babel">
-var arr = [
-            <h1>hello world</h1>,
-            <h2>hello world</h2>,
-            
-            ];
+var HelloMessage = React.createClass({
+    render: function(){
+        return <h1>hello {this.props.name}</h1>
+    }/*实现交互，function里面取到ReactDOM.render里面的值*/
+})
 
+/* <HelloMessage name="John"/> 可以说是React.createClass的实例化，this指向实例化对象*/
 ReactDOM.render(
-    <div>
-   
-        {arr[1]}
-
-    </div>,
+    <HelloMessage name="John"/>,
     document.querySelector('#example')
 )
 
