@@ -12,18 +12,20 @@
 <body>
     <div id="example"></div>
     <script type="text/babel">
-        var name = ['xiaoxia','ming']
+var arr = [
+            <h1>hello world</h1>,
+            <h2>hello world</h2>,
+            
+            ];
 
-        ReactDOM.render(
-            <div>
-                {
-                    name.map(function(name){
-                        return <div>hello,{name}!</div>
-                    })
-                }
-            </div>,
-            document.querySelector('#example')
-        )
+ReactDOM.render(
+    <div>
+   
+        {arr}
+
+    </div>,
+    document.querySelector('#example')
+)
 
 
 
