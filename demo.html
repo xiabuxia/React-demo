@@ -14,23 +14,28 @@
     <script type="text/babel">
 
 
-var data = 123;
 
-/*组件类的PropTypes属性，就是用来验证组件实例的属性是否符合要求，下面表示组件的title属性是必须的，并且要是数字类型*/
-/*getDefaultProps方法可以用来设置组件属性的默认值。*/
 
-var MyTitle  = React.createClass({
-    getDefaultProps: function(){
-        return {title: 'hello world'}
+
+/*在组件类标签中设置ref属性，用this.refs.[name]获取真实的dom节点。*/
+
+var DomNode  = React.createClass({
+    handleClick: function(){
+        this.refs.hello.focus();
     },
     render: function(){
-        return <h1>{this.props.title}</h1>
+        return (
+            <div>
+                <input type="text" ref="hello"/>
+                <button onClick={this.handleClick}></button>
+            </div>
+        )
     }
 })
 
 
 ReactDOM.render(
-    <MyTitle title={data}/>,
+    <DomNode/>,
     document.querySelector('#example')
 )
 
