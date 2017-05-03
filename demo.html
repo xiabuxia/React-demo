@@ -8,6 +8,7 @@
     <script src="./build/react.js"></script>
     <script src="./build/react-dom.js"></script>
     <script src="./build/browser.min.js"></script>
+    <script src="./build/jquery.min.js"></script>
 </head>
 <body>
     <div id="example"></div>
@@ -19,29 +20,31 @@
 
 /*用户在表单填入的内容，属于用户跟组件的互动，所以不能用 this.props*/
 
-      var Hello = React.createClass({
+      var UserGist = React.createClass({
         getInitialState: function () {
           return {
-           opacity: 1.0 
+           username: '',
+           lastGistUrl: '' 
           };
         },
 
       componentDidMount: function(){
-          this.timer = setInterval(function(){
-                var opacity = this.state.opacity;
-                opacity -= .05;
-                if(opacity < 0.1){
-                    opacity = 1.0;
-                }
-                this.setState({opacity: opacity})
-          }.bind(this),100);
-
+          $.get(this.props.source,function(result){
+              console.log(result)
+              var lastGist = result[0];
+              if(this.isMounted()){
+                this.setState({
+                    username: lastGist.owner.login,
+                    lastGistUrl: lastGist.html_url
+                })
+              }
+          }.bind(this));
       },
 
         render: function () {
           return (
-            <div style={{opacity: this.state.opacity}} onClick={this.change}>
-              Hello {this.props.name}
+            <div>
+              {this.state.username}`s last gist is <a href={this.state.lastGistUrl}>here</a>.
             </div>
           );
         }
@@ -49,9 +52,9 @@
 
 
 ReactDOM.render(
-    <Hello name="world"/>,
-    document.querySelector('#example')
-)
+  <UserGist source="https://api.github.com/users/octocat/gists" />,
+  document.getElementById('example')
+);
 
 
 
