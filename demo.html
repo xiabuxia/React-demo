@@ -17,30 +17,39 @@
 
 
 
-/*在组件类标签中设置ref属性，用this.refs.[name]获取真实的dom节点。*/
+/*用户在表单填入的内容，属于用户跟组件的互动，所以不能用 this.props*/
 
-var LikeButton  = React.createClass({
-    getInitialState: function(){
-        return {value: ''};
-    },
-    change: function(event){
-        this.setState({value:event.target.value})
-    },
-    render: function(){
-        var value = this.state.value
-        return (
-            <div>
-                <input type="text" onChange={this.change}/>
-                <p>{value}</p>
+      var Hello = React.createClass({
+        getInitialState: function () {
+          return {
+           opacity: 1.0 
+          };
+        },
+
+      componentDidMount: function(){
+          this.timer = setInterval(function(){
+                var opacity = this.state.opacity;
+                opacity -= .05;
+                if(opacity < 0.1){
+                    opacity = 1.0;
+                }
+                this.setState({opacity: opacity})
+          }.bind(this),100);
+
+      },
+
+        render: function () {
+          return (
+            <div style={{opacity: this.state.opacity}} onClick={this.change}>
+              Hello {this.props.name}
             </div>
-            
-        )
-    }
-})
+          );
+        }
+      });
 
 
 ReactDOM.render(
-    <LikeButton/>,
+    <Hello name="world"/>,
     document.querySelector('#example')
 )
 
