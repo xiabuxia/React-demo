@@ -19,23 +19,26 @@
 
 /*在组件类标签中设置ref属性，用this.refs.[name]获取真实的dom节点。*/
 
-var DomNode  = React.createClass({
-    handleClick: function(){
-        this.refs.hello.focus();
+var LikeButton  = React.createClass({
+    getInitialState: function(){
+        return {liked: false};
+    },
+    handleClick: function(event){
+        this.setState({liked: !this.state.liked});
     },
     render: function(){
+        var text = this.state.liked ? 'like' : 'havent\t liked'
         return (
-            <div>
-                <input type="text" ref="hello"/>
-                <button onClick={this.handleClick}></button>
-            </div>
+            <p onClick={this.handleClick}>
+                you {text} this. Click to toggle
+            </p>
         )
     }
 })
 
 
 ReactDOM.render(
-    <DomNode/>,
+    <LikeButton/>,
     document.querySelector('#example')
 )
 
