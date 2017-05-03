@@ -21,17 +21,19 @@
 
 var LikeButton  = React.createClass({
     getInitialState: function(){
-        return {liked: false};
+        return {value: ''};
     },
-    handleClick: function(event){
-        this.setState({liked: !this.state.liked});
+    change: function(event){
+        this.setState({value:event.target.value})
     },
     render: function(){
-        var text = this.state.liked ? 'like' : 'havent\t liked'
+        var value = this.state.value
         return (
-            <p onClick={this.handleClick}>
-                you {text} this. Click to toggle
-            </p>
+            <div>
+                <input type="text" onChange={this.change}/>
+                <p>{value}</p>
+            </div>
+            
         )
     }
 })
